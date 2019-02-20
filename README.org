@@ -1,0 +1,33 @@
+* Org Source Block Helpers (osbh) package
+Functions that prompt the user for org source block properties and their values
+using the user's own Emacs configuration and Org itself for possible values.
+** How does it work?
+:PROPERTIES:
+:ID:       80BDE520-B2DF-4318-A527-FB01A92C4933
+:END:
+This package gets properties and their values from three sources:
+
+1. For org babel languages, it queries the user's own =org-babel-load-languages= value.
+2. For properties and their possible values, it queries =org-babel-common-header-args-w-values=.
+3. If a particular property has a possible value of =:any= (this is org babel's
+   way of indicating that the user can supply any value) and the user chooses
+   =:any=, then this package will further prompt the user for the value they
+   wish to provide.
+** Usage scenarios
+*** Scenario 1: Create empty source code block at point
+If you wish to insert an org source code block do =M-x osbh:insert-org-src-code-block=.
+*** Scenario 2: Enclose highlighted code in an org source code block
+If you have code in an org buffer that is not yet enclosed in an org source code
+block, simply highlight the code and do =M-x osbh:enclose-region-in-src-code-block= and
+follow the prompts keeping in mind the notes in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does it work?]].
+*** Scenario 3: Add org source block properties to an already existing org source code block
+If you already have an org source block and would like to add more org source
+block properties, then position your cursor at the start of the org source code
+block and do =M-x osbh:add-additional-org-src-block-properties= and follow the prompts
+keeping in mind the notes in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does it work?]]
+** Configuration
+#+begin_src  emacs-lisp 
+(use-package org-source-block-helpers
+  :load-path "/path/to/org-source-block-helpers-directory")
+#+end_src
+
