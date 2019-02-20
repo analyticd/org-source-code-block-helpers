@@ -30,4 +30,14 @@ keeping in mind the notes in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does
 (use-package org-source-block-helpers
   :load-path "/path/to/org-source-block-helpers-directory")
 #+end_src
+** Note about C and C++ source code blocks
+There is a bit more intelligence for C and C++ source code blocks based on the
+capabilities of =ob-C.el=.
 
+Note that C++ is not returned as a possible value for =org-babel-load-languages=
+and so you must select C and then after the whatever =osbh= function you are using
+finishes executing manually change C to C++ in order for C++ specific
+functionality like finding the =iostream= library, =:includes '(<iostream>)=, to
+work.
+
+See documentation for =ob-C.el= for specifics of what it can do.
