@@ -26,8 +26,14 @@ block properties, then position your cursor at the start of the org source code
 block and do =M-x osbh:add-additional-org-src-block-properties= and follow the prompts
 keeping in mind the notes in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does it work?]]
 ** Configuration
+Configuration using use-package with some possible key bindings.
+
 #+begin_src  emacs-lisp 
 (use-package org-source-block-helpers
+  :bind (:map org-mode-map ("C-: i" . 'osbh:insert-org-src-code-block))
+  :bind (:map org-mode-map ("C-: e" . 'osbh:enclose-region-in-src-code-block))
+  :bind (:map org-mode-map ("C-: l" . 'osbh:insert-org-babel-language))
+  :bind (:map org-mode-map ("C-: a" . 'osbh:add-additional-org-src-block-properties))
   :load-path "/path/to/org-source-block-helpers-directory")
 #+end_src
 ** Note about C and C++ source code blocks
