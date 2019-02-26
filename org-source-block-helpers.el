@@ -27,6 +27,7 @@ then return that, otherwise prompt user for language to use and
 insert it and then return the chosen language."
   (interactive)
   (let (lang)
+    (move-beginning-of-line nil)
     (when (not (looking-at "#\\+BEGIN_SRC\\|#\\+begin_src"))
       (error "Point not at beginning of org source code block"))
     (if (re-search-forward "#\\+begin_src +[^ ]" (line-end-position) t)
@@ -50,6 +51,7 @@ insert it and then return the chosen language."
   "When point is at beginning of org source code block, interact
 with user to generate org source block properties and their values."
   (interactive)
+  (move-beginning-of-line nil)
   (when (not (looking-at "#\\+BEGIN_SRC\\|#\\+begin_src"))
     (error "Point not at beginning of org source code block"))
   (cl-labels ((completing-org-block-property-read
