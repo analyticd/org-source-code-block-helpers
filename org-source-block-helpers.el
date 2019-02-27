@@ -43,9 +43,17 @@ insert it and then return the chosen language."
       (setf lang (completing-read
                   "Choose the language: "
                   (mapcar '(lambda (pair) (format "%s" (car pair))) org-babel-load-languages)))
-      (insert (format " %s " lang))
+      (insert (format " %s " (osbh:transform-lang-name lang)))
       (move-beginning-of-line nil)
       lang)))
+
+(defun osbh:transform-lang-name (lang)
+  "Return the `LANG' transformed to some custom value. This
+  allows to deal with situations like j-mode not loading when you
+  go to an org src edit buffer since the language provided was
+  spelled capital J."
+  (cond ((equal lang "J") (downcase lang))
+        (t lang)))
 
 (defun osbh:add-additional-org-src-block-properties ()
   "When point is at beginning of org source code block, interact
