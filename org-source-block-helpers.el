@@ -59,7 +59,8 @@ spelled capital J."
 
 (defun osbh:add-additional-org-src-block-properties ()
   "When point is at beginning of org source code block, interact
-with user to generate org source block properties and their values."
+with user to generate (additional) org source block properties
+and their values."
   (interactive)
   (move-beginning-of-line nil)
   (when (not (looking-at "#\\+BEGIN_SRC\\|#\\+begin_src"))
@@ -86,7 +87,7 @@ user for their choice from all available defined values for that property."
                       (property-value (if (equal property-value ":any")
                                           (read-string (format  "Set %s to: " property-string))
                                         property-value)))
-                 (insert (format ":%s %s " property-string property-value)))))
+                 (insert (format " :%s %s " property-string property-value)))))
              (let ((lang (osbh:insert-org-babel-language)))
                (move-end-of-line nil)
                (while (and (and (or (equal lang "C")(equal lang "C++")))
