@@ -48,11 +48,13 @@ insert it and then return the chosen language."
       lang)))
 
 (defun osbh:transform-lang-name (lang)
-  "Return the `LANG' transformed to some custom value. This
-  allows to deal with situations like j-mode not loading when you
-  go to an org src edit buffer since the language provided was
-  spelled capital J."
+  "Return the `LANG' transformed to a custom value. This allows
+to deal with situations like j-mode not loading when you go to an
+org src edit buffer since the org-babel language provided was
+spelled capital J."
   (cond ((equal lang "J") (downcase lang))
+        ((equal lang "C") (when (y-or-n-p "Do you actually want C++ instead of C? ")
+                            (setf lang "C++")))
         (t lang)))
 
 (defun osbh:add-additional-org-src-block-properties ()
