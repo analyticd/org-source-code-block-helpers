@@ -17,6 +17,7 @@ Prompt the user for the org babel language and other properties."
   (org-insert-structure-template "src")
   (forward-line)
   (yank)
+  (insert "\n")
   (re-search-backward "#\\+BEGIN_SRC\\|#\\+begin_src")
   ;; (move-beginning-of-line nil)
   (call-interactively 'osbh:add-additional-org-src-block-properties))
