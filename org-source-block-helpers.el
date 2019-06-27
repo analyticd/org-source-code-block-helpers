@@ -43,7 +43,7 @@ insert it and then return the chosen language."
           lang)
       (setf lang (completing-read
                   "Choose the language: "
-                  (mapcar '(lambda (pair) (format "%s" (car pair))) org-babel-load-languages)))
+                  (mapcar #'(lambda (pair) (format "%s" (car pair))) org-babel-load-languages)))
       (insert (format " %s " (osbh:transform-lang-name lang)))
       (move-beginning-of-line nil)
       lang)))
@@ -74,7 +74,7 @@ user for their choice from all available defined values for that property."
                 (format  (concat "Value for %s property (note: if available, choose :any if you want/need"
                                  " to supply value yourself): ")
                          (capitalize property-string))
-                (mapcar '(lambda (symb) (format "%s" symb))
+                (mapcar #'(lambda (symb) (format "%s" symb))
                         (flatten (cdr (eval `(assq ,property-key org-babel-common-header-args-w-values)))))
                 nil t))
               (prompt-for-org-src-block-property
