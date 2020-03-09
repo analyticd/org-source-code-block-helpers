@@ -1,6 +1,13 @@
 * Org Source Block Helpers (osbh) package
 Functions that prompt the user for org source block properties and their values
 using the user's own Emacs configuration and Org itself for possible values.
+** Why?
+When writing blog posts, email bodies, or anything else in =Org= where you are
+likely to include code blocks, and especially a lot of them, this can speed
+things up. Perhaps more importantly, this package will expose to the user
+possible values for Org babel languages and their associated code block
+properties rather than having to remember all of them yourself or consult
+documentation (there are a lot of properties and associated values).
 ** How does it work?
 :PROPERTIES:
 :ID:       80BDE520-B2DF-4318-A527-FB01A92C4933
@@ -15,18 +22,21 @@ This package gets properties and their values from three sources:
    wish to provide.
 ** Usage scenarios
 *** Scenario 1: Create empty source code block at point
-If you wish to insert an org source code block do =M-x osbh:insert-org-src-code-block=.
-*** Scenario 2: Enclose highlighted code in an org source code block
+If you wish to insert an org source code block do =M-x
+osbh:insert-org-src-code-block=. Follow the prompts keeping in mind the notes
+in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does it work?]] 
+*** Scenario 2: Enclose region in an org source code block
 If you have code in an org buffer that is not yet enclosed in an org source code
 block, simply highlight the code and do =M-x osbh:enclose-region-in-src-code-block= and
 follow the prompts keeping in mind the notes in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does it work?]].
 *** Scenario 3: Add org source block properties to an already existing org source code block
-If you already have an org source block and would like to add more org source
-block properties, then position your cursor at the start of the org source code
-block and do =M-x osbh:add-additional-org-src-block-properties= and follow the prompts
-keeping in mind the notes in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does it work?]]
+If you already have an org source block and would like to add a (missing)
+language or more org source block properties, then position your cursor on
+the same line as the org source code block =#+BEGIN_SRC= or =#+begin_src=
+directive and do =M-x osbh:add-additional-org-src-block-properties= and follow
+the prompts keeping in mind the notes in [[id:80BDE520-B2DF-4318-A527-FB01A92C4933][How does it work?]]
 ** Configuration
-Configuration using use-package with some possible key bindings.
+Example configuration using =use-package= with some possible key bindings.
 
 #+begin_src  emacs-lisp 
 (use-package org-source-block-helpers
@@ -37,13 +47,12 @@ Configuration using use-package with some possible key bindings.
   :load-path "/path/to/org-source-block-helpers-directory")
 #+end_src
 ** Note about C and C++ source code blocks
-There is a bit more intelligence for C and C++ source code blocks based on the
+There is a additional intelligence for C and C++ source code blocks based on the
 capabilities of =ob-C.el=.
 
-Note that C++ is not returned as a possible value for =org-babel-load-languages=
-and so you must select C and then after the whatever =osbh= function you are using
-finishes executing manually change C to C++ in order for C++ specific
-functionality like finding the =iostream= library, =:includes '(<iostream>)=, to
-work.
-
-See documentation for =ob-C.el= for specifics of what it can do.
+Why? Note that C++ is not returned as a possible value for
+=org-babel-load-languages=. That is an Org decision which probably hs some
+good reason. So, to specify a C++ block you must select C as the org babel language and then the =osbh=
+interactive function you are using will prompt you for whether you want to
+make it a C++ code block and prompt you additionally for appropriate C++
+code block properties. Possible values are defined in =ob-C.el=. 
