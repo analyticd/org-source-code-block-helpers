@@ -151,6 +151,6 @@ choice from all available defined values for that property."
             property-value)))
     (insert (format " :%s %s " property-string property-value))))
 
-(provide 'org-source-block-helpers)
+(provide 'org-source-code-block-helpers)
 
 ;;; org-source-block-helpers.el ends here
