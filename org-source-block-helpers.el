@@ -16,7 +16,8 @@
 ;;
 ;; NOTE Each command above requires the point (cursor) to be anywhere on the
 ;; same line as the #+BEGIN_SRC or #+begin_src directive when the command is
-;; executed.
+;; executed. The user is warned with an error message if this is not the
+;; case.
 ;;
 ;; See README for additional details.
 
