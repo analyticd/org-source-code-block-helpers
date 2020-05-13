@@ -120,6 +120,13 @@ org-babel language provided was spelled capital J.
            (setf lang "C++")))
         (t lang)))
 
+(defun flatten (x)
+  "From p.49 of Graham's On Lisp"
+  (cl-labels ((rec (x acc)
+                   (cond ((null x) acc)
+                         ((atom x) (cons x acc))
+                         (t (rec (car x) (rec (cdr x) acc))))))
+    (rec x nil)))
 
 (defun completing-org-block-property-read (property-key property-string)
   "Given a `property-key', e.g., :tangle, then prompt the user for their
